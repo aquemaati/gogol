@@ -4,7 +4,7 @@
           "version"
      ],
      "install": {
-          "darwin": "website",
+          "darwin": "https://ziglang.org/download/",
           "window": "website",
           "linux": "website"
      }

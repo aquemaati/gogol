@@ -32,7 +32,7 @@ var BasicCmd = &cobra.Command{
 		// Show the what the user have to do
 		f, _ := tools.LangIsInstalled(lang, setUp.Cmd)
 		if !f {
-			log.Fatalln(lang, "programming language not installed", "go to ", setUp.Install[runtime.GOOS])
+			log.Fatalln(lang, "programming language not installed", "go to ", setUp.Install[runtime.GOOS], "to download it")
 		}
 	},
 }
