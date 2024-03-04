@@ -55,6 +55,7 @@ var BasicCmd = &cobra.Command{
 
 		// Step 5
 		// Executing get json instructions
+		fmt.Println(data.Link)
 		basic, err := GetBasicJson(data.Link)
 		if err != nil {
 			log.Fatalln(err)
