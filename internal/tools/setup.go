@@ -31,7 +31,7 @@ func LangIsInstalled(s string, cmdLang []string) (bool, error) {
 }
 
 // function to get the command line to check if the programming language
-// is properly installed
+// is properly installed on the user'os
 func GetCmdCheckInstall(url string) (SetUp, error) {
 	setUp := new(SetUp)
 	resp, err := http.Get(url)
