@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"gogol/internal/tools"
 	"log"
+	"runtime"
 
 	"github.com/spf13/cobra"
 )
@@ -24,10 +25,11 @@ var BasicCmd = &cobra.Command{
 			fmt.Println(err)
 		}
 		fmt.Println(data)
-		cmdInstall, _ := tools.GetCmdCheckInstall(data.LinkSetup)
-		f, _ := tools.LangIsInstalled(lang, cmdInstall)
+		setUp, _ := tools.GetCmdCheckInstall(data.LinkSetup)
+		fmt.Println(setUp)
+		f, _ := tools.LangIsInstalled(lang, setUp.Cmd)
 		if !f {
-			log.Fatalln(lang, "programming language not installed")
+			log.Fatalln(lang, "programming language not installed", "go to ", setUp.Install[runtime.GOOS])
 		}
 	},
 }

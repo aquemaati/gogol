@@ -3,19 +3,9 @@
           "go",
           "version"
      ],
-     "install": [
-          {
-               "os": "darwin",
-               "link": "website"
-               
-          },
-          {
-               "os": "windows",
-               "link": "website"
-          },
-          {
-               "os": "linux",
-               "link": "website"
-          }
-     ]
+     "install": {
+          "darwin": "website",
+          "window": "website",
+          "linux": "website"
+     }
 }
