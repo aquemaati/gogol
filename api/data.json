@@ -1,0 +1,32 @@
+[
+     {
+          "name": "basic",
+          "languages": [
+               {
+                    "name": "go",
+                    "link": "http",
+                    "linksetup": ""
+               },
+               {
+                    "name": "python",
+                    "link": "http",
+                    "linksetup": ""
+               },
+               {
+                    "name": "zig",
+                    "link": "http",
+                    "linksetup": ""
+               },
+               {
+                    "name": "julia",
+                    "link": "http",
+                    "linksetup": ""
+               },
+               {
+                    "name": "c",
+                    "link": "http",
+                    "linksetup": ""
+               }
+          ]
+     }
+]

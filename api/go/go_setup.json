@@ -1,0 +1,16 @@
+{
+     "verify": {
+          "cmd": ["go", "version"]
+     },
+     "install": [
+          {
+               "os": "darwin"
+          },
+          {
+               "os": "windows"
+          },
+          {
+               "os": "linux"
+          }
+     ]
+}
