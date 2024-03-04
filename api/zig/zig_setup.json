@@ -4,7 +4,7 @@
           "version"
      ],
      "install": {
-          "darwin": "https://ziglang.org/download/",
+          "arm64": "https://ziglang.org/download/",
           "window": "website",
           "linux": "website"
      }
