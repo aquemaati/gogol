@@ -5,7 +5,7 @@
                {
                     "name": "go",
                     "link": "http",
-                    "linksetup": ""
+                    "linksetup": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/go/go_setup.json"
                },
                {
                     "name": "python",
