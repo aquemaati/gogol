@@ -16,7 +16,7 @@ var BasicCmd = &cobra.Command{
 	Use:   "basic",
 	Short: "Create a simple project to learn or test ideas",
 	Long:  `Language avaiable : go, python, julia, ...`,
-	Run: func(cmd *cobra.Command, args []string) {	
+	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("basic called")
 
 		data, err := tools.GetDatas("basic", lang)
@@ -24,7 +24,8 @@ var BasicCmd = &cobra.Command{
 			fmt.Println(err)
 		}
 		fmt.Println(data)
-		f, _ := tools.LangIsInstalled(lang)
+		cmdInstall, _ := tools.GetCmdCheckInstall(data.LinkSetup)
+		f, _ := tools.LangIsInstalled(lang, cmdInstall)
 		if !f {
 			log.Fatalln(lang, "programming language not installed")
 		}

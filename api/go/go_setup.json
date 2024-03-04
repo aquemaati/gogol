@@ -1,16 +1,21 @@
 {
-     "verify": {
-          "cmd": ["go", "version"]
-     },
+     "cmd": [
+          "go",
+          "version"
+     ],
      "install": [
           {
-               "os": "darwin"
+               "os": "darwin",
+               "link": "website"
+               
           },
           {
-               "os": "windows"
+               "os": "windows",
+               "link": "website"
           },
           {
-               "os": "linux"
+               "os": "linux",
+               "link": "website"
           }
      ]
 }
