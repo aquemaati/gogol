@@ -39,13 +39,13 @@
                          "files": [
                               {
                                    "name": "myfunction.go",
-                                   "content": "https://raw.githubusercontent.com/Zone-Libre/gogol-api/main/go/basic/pkg/myLibrary/myFunction.txt",
+                                   "content": "package mylibrary\n\nfunc Greet(s string) string {\n\treturn \"Hello \" + s\n}",
                                    "description": "You can put your external function here",
                                    "cmd": []
                               },
                               {
                                    "name": "myfunction_test.go",
-                                   "content": "https://raw.githubusercontent.com/Zone-Libre/gogol-api/main/go/basic/pkg/myLibrary/myFunction_test.txt",
+                                   "content": "package mylibrary_test\n\nimport (\n\tmylibrary \"%s/pkg/mylibrary\"\n\t\"testing\"\n)\n\nfunc TestGreet(t *testing.T) {\n\twant := \"Hello World\"\n\tif got := mylibrary.Greet(\"World\"); got != want {\n\t\tt.Errorf(\"Greet() = %q, want %q\", got, want)\n\t}\n}",
                                    "description": "You can put your external function here",
                                    "cmd": []
                               }

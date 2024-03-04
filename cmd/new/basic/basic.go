@@ -92,6 +92,10 @@ var BasicCmd = &cobra.Command{
 				log.Fatalln(err)
 			}
 		}
+		// STEP 8
+		// Create all subdirectories
+		
+
 	},
 }
 var lang, name string
