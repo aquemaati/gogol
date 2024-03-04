@@ -19,14 +19,17 @@ var BasicCmd = &cobra.Command{
 	Long:  `Language avaiable : go, python, julia, ...`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("basic called")
-
+		// get all datas for basics projects with the
+		// programming language selected
 		data, err := tools.GetDatas("basic", lang)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
 		}
-		fmt.Println(data)
+		// get command to check if the programming language
+		// is well installed
 		setUp, _ := tools.GetCmdCheckInstall(data.LinkSetup)
-		fmt.Println(setUp)
+		// check if the language is wel installed, if not
+		// Show the what the user have to do
 		f, _ := tools.LangIsInstalled(lang, setUp.Cmd)
 		if !f {
 			log.Fatalln(lang, "programming language not installed", "go to ", setUp.Install[runtime.GOOS])

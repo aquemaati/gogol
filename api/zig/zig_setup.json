@@ -1,0 +1,11 @@
+{
+     "cmd": [
+          "zig",
+          "version"
+     ],
+     "install": {
+          "darwin": "website",
+          "window": "website",
+          "linux": "website"
+     }
+}

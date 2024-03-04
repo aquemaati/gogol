@@ -15,15 +15,17 @@ type SetUp struct {
 
 // We want to be sure that the programming language is well installed
 func LangIsInstalled(s string, cmdLang []string) (bool, error) {
-	cmd := exec.Command(cmdLang[0], cmdLang[1:]...)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		fmt.Println(err, "1")
-		return false, err
-	}
-	if strings.Contains(string(out), "not found") {
-		fmt.Println(err)
-		return false, nil
+	if len(cmdLang) > 1 {
+		cmd := exec.Command(cmdLang[0], cmdLang[1:]...)
+		out, err := cmd.CombinedOutput()
+		if err != nil {
+			fmt.Println(err, "1")
+			return false, err
+		}
+		if strings.Contains(string(out), "not found") {
+			fmt.Println(err)
+			return false, nil
+		}
 	}
 	return true, nil
 }
