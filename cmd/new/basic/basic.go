@@ -94,7 +94,9 @@ var BasicCmd = &cobra.Command{
 		}
 		// STEP 8
 		// Create all subdirectories
-		
+		if err := CreateFilesAndPackages(basic.Subdirectories, name); err != nil {
+			log.Fatalln(err)
+		}
 
 	},
 }

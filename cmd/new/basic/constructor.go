@@ -35,7 +35,7 @@ func CreateFilesAndPackages(subdirs []Subdirectory, name string) error {
 				return err
 			}
 		}
-		CreateFilesAndPackages(subdirs, name)
+		CreateFilesAndPackages(subdir.Subdirectories, name)
 	}
 	return nil
 }
