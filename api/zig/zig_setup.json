@@ -4,7 +4,7 @@
           "version"
      ],
      "install": {
-          "arm64": "https://ziglang.org/download/",
+          "arm64": "https://ziglang.org/builds/zig-macos-aarch64-0.12.0-dev.3152+90c1a2c41.tar.xz",
           "window": "website",
           "linux": "website"
      }
