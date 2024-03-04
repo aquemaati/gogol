@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"gogol/internal/tools"
+	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -15,13 +16,21 @@ var BasicCmd = &cobra.Command{
 	Use:   "basic",
 	Short: "Create a simple project to learn or test ideas",
 	Long:  `Language avaiable : go, python, julia, ...`,
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(cmd *cobra.Command, args []string) {	
 		fmt.Println("basic called")
-		f, _ := tools.LangIsInstalled("go")
-		fmt.Println(f)
-		test()
+
+		data, err := tools.GetDatas("basic", lang)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println(data)
+		f, _ := tools.LangIsInstalled(lang)
+		if !f {
+			log.Fatalln(lang, "programming language not installed")
+		}
 	},
 }
+var lang string
 
 func init() {
 	//rootCmd.AddCommand(basicCmd)
@@ -35,4 +44,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// basicCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	BasicCmd.Flags().StringVarP(&lang, "lang", "l", "none", "Specify the programming language")
 }
