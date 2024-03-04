@@ -7,24 +7,23 @@ import (
 
 // handling basic api
 type BASIC struct {
-	PreCmd         map[string][]string
-	Files          []File
-	Subdirectories []Subdirectory
+	PreCmd         map[string][]string `json:"precmd"`
+	Files          []File              `json:"files"`
+	Subdirectories []Subdirectory      `json:"subdirectories"`
 }
 
 type File struct {
-	Name        string
-	Description string
-	Content     string
-	Cmd         [][]string
+	Name        string     `json:"name"`
+	Content     string     `json:"content"`
+	Description string     `json:"description"`
+	Cmd         [][]string `json:"cmd"`
 }
 type Subdirectory struct {
-	Name           string
-	Description    string
-	Content        string
-	Cmd            [][]string
-	Files          []File
-	Subdirectories []Subdirectory
+	Name           string         `json:"name"`
+	Description    string         `json:"description"`
+	Cmd            [][]string     `json:"cmd"`
+	Files          []File         `json:"files"`
+	Subdirectories []Subdirectory `json:"subdirectories"`
 }
 
 func GetBasicJson(url string) (BASIC, error) {

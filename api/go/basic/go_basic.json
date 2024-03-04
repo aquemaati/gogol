@@ -30,13 +30,11 @@
      "subdirectories": [
           {
                "name": "pkg",
-               "content": "adressHTTP/go/pkg",
                "description": "Creating a directory named `pkg` in a Go project serves as a convention for organizing reusable packages or libraries, promoting modularization, code reusability, and maintainability in Go projects.",
                "files": [],
                "subdirectories": [
                     {
                          "name": "mylibrary",
-                         "content": "adressHTTP/go/pkg/mylibrary",
                          "description": "my-library inside the pkg directory of a Go project adheres to the convention for structuring a reusable library or package within the project's package ecosystem, enhancing code organization, modularity, and reusability for the library's components across the project or potentially across multiple projects.",
                          "files": [
                               {
