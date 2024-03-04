@@ -16,13 +16,13 @@
      "files": [
           {
                "name": "main.go",
-               "Content": "https://raw.githubusercontent.com/Zone-Libre/gogol-api/main/go/basic/main.txt",
+               "Content": "package main\n\n/*\n\"Using a main.go file in a Go project serves as the designated entry point for executable applications,\nadhering to a widely recognized convention, facilitating clarity, organization, and executable output generation.\"\n*/\nimport (\n\t\"fmt\"\n\tmylibrary \"%s/pkg/mylibrary\"\n)\n\nfunc main() {\n\tgreet := mylibrary.Greet(\"%s\")\n\tfmt.Println(greet)\n}",
                "description": "Using a main.go file in a Go project serves as the designated entry point for executable applications, adhering to a widely recognized convention, facilitating clarity, organization, and executable output generation.",
                "cmd": []
           },
           {
                "name": "main_test.go",
-               "content": "https://raw.githubusercontent.com/Zone-Libre/gogol-api/main/go/basic/main_test.txt",
+               "content": "package main_test\n\n// Use the command go test to test your program\n\nimport (\n\t\"bytes\"\n\t\"os\"\n\t\"os/exec\"\n\t\"strings\"\n\t\"testing\"\n)\n\nfunc TestMain(m *testing.M) {\n\n\tos.Exit(m.Run())\n}\n\nfunc TestMainOutput(t *testing.T) {\n\tcmd := exec.Command(\"go\", \"run\", \"main.go\")\n\tvar stdout, stderr bytes.Buffer\n\tcmd.Stdout = &stdout\n\tcmd.Stderr = &stderr\n\terr := cmd.Run()\n\tif err != nil {\n\t\tt.Fatalf(\"Command failed with error: %v\", err)\n\t}\n\texpected := \"Hello %s\"\n\tactual := stdout.String()\n\tif strings.TrimSpace(actual) != expected {\n\t\tt.Errorf(\"Expected output %q, got %q\", expected, actual)\n\t}\n}",
                "description": "main_test.go file in a Go project serves as a convention for writing tests for the corresponding main.go file, facilitating separate testing of the application logic, ensuring code quality, and supporting test-driven development practices.",
                "cmd": []
           }

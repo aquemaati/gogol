@@ -1,0 +1,32 @@
+package main_test
+
+// Use the command go test to test your program
+
+import (
+	"bytes"
+	"os"
+	"os/exec"
+	"strings"
+	"testing"
+)
+
+func TestMain(m *testing.M) {
+
+	os.Exit(m.Run())
+}
+
+func TestMainOutput(t *testing.T) {
+	cmd := exec.Command("go", "run", "main.go")
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	err := cmd.Run()
+	if err != nil {
+		t.Fatalf("Command failed with error: %v", err)
+	}
+	expected := "Hello %s"
+	actual := stdout.String()
+	if strings.TrimSpace(actual) != expected {
+		t.Errorf("Expected output %q, got %q", expected, actual)
+	}
+}

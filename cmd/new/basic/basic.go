@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 MATHIAS MARCHETTI aquemaati@gmail.com
 */
 package cmd
 
@@ -8,7 +8,9 @@ import (
 	"gogol/internal/tools"
 	"log"
 	"os"
+	"os/exec"
 	"runtime"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -49,35 +51,54 @@ var BasicCmd = &cobra.Command{
 		if err := os.Mkdir(name, 0777); err != nil {
 			log.Fatalln(err)
 		}
+		// Going inside this directory to execute new cmd
 		if err := os.Chdir(name); err != nil {
 			log.Fatalln(err)
 		}
 
-		// Step 5
-		// Executing get json instructions
-		fmt.Println(data.Link)
+		// STEP 5
+		// get json instructions
 		basic, err := GetBasicJson(data.Link)
 		if err != nil {
 			log.Fatalln(err)
 		}
-		fmt.Println(basic)
 
+		//STEP 6
+		// Execute precommand
+		// TODO create condition for dependancies
+		for imap, cm := range basic.PreCmd {
+			for i, v := range cm {
+				if v == "%s" {
+					basic.PreCmd[imap][i] = name
+				}
+			}
+			if err := exec.Command(cm[0], cm[1:]...).Run(); err != nil {
+				log.Fatalln(err)
+			}
+		}
+
+		// STEP 7
+		// Create files and write inside
+		for _, f := range basic.Files {
+			file, err := os.Create(f.Name)
+			if err != nil {
+				log.Fatalln(err)
+			}
+			defer file.Close()
+			fmt.Printf("%s has been created\n", f.Name)
+			// Writing inside
+			text := strings.ReplaceAll(f.Content, "%s", name)
+			if _, err := file.WriteString(text); err != nil {
+				log.Fatalln(err)
+			}
+		}
 	},
 }
 var lang, name string
 
 func init() {
-	//rootCmd.AddCommand(basicCmd)
-
 	// Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// basicCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// basicCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	BasicCmd.Flags().StringVarP(&lang, "lang", "l", "none", "Specify the programming language")
 	BasicCmd.Flags().StringVarP(&name, "name", "n", "project", "Specify the name")
 }
