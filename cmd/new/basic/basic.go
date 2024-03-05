@@ -26,7 +26,7 @@ var BasicCmd = &cobra.Command{
 
 		//		log.Fatalln(dep, len(dep))
 		fmt.Println("")
-		fmt.Println("Creating a", cmd.Use, name, "application with", lang, "programming language...")
+		fmt.Printf("\033[1;32m%s\033[0m", "Creating a "+cmd.Use+" "+name+" application with "+lang+" programming language...\n")
 		fmt.Println("")
 
 		// STEP 1
@@ -177,12 +177,13 @@ func executeCommand(cm []string) {
 	for _, s := range cm {
 		fmt.Print(s, " ")
 	}
-	fmt.Println("")
+	//fmt.Println("")
 
 	// Affiche la sortie de la commande
 	fmt.Println("\n", string(out))
 }
 
+// allow to come back to the main directory
 func ChangeToParentDirectoryWithSpecificName(targetDir string) error {
 	// Get the absolute path of the current directory
 	currentDir, err := os.Getwd()

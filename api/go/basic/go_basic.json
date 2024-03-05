@@ -1,4 +1,5 @@
 {
+     "description": "This Go project is a basic application structure with predefined setup instructions and directory organization. It includes a main Go file (main.go) serving as the entry point for executable applications, along with a corresponding test file (main_test.go) for testing the application logic. The project also follows a convention for organizing reusable packages or libraries by creating a pkg directory, with an example library (mylibrary) provided within it. The provided setup instructions include commands for running, testing, and building the program.",
      "precmd": {
           "init": [
                "go",
@@ -54,8 +55,8 @@
                ],
                "cmd": []
           }
-     ], 
-     "postcmd":{},
+     ],
+     "postcmd": {},
      "endinstruction": [
           "To run your program : go run .",
           "To test your program : go test ./...",

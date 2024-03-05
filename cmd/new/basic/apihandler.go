@@ -8,6 +8,7 @@ import (
 
 // handling basic api
 type BASIC struct {
+	Description    string              `json:"description"`
 	PreCmd         map[string][]string `json:"precmd"`
 	Files          []File              `json:"files"`
 	Subdirectories []Subdirectory      `json:"subdirectories"`
