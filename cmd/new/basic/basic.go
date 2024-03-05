@@ -83,10 +83,13 @@ var BasicCmd = &cobra.Command{
 						basic.PreCmd[key][i] = name
 					}
 				}
+				fmt.Println("")
+				fmt.Print(":::> Initialize")
 				executeCommand(cm)
 			} else if key == "dep" && len(cm) != 0 {
 				for _, d := range dep {
 					cm = append(cm, d)
+					fmt.Print("@@@> Catching dependency")
 					executeCommand(cm)
 				}
 			} else {
@@ -141,7 +144,7 @@ var BasicCmd = &cobra.Command{
 		}
 
 		// SAY everything went ok
-		fmt.Println("CONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
+		fmt.Println("\nCONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
 		// Print last instructions
 		for _, v := range basic.EndInstruction {
 			fmt.Println("\t\t", v)
