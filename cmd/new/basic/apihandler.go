@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 )
 
@@ -31,11 +32,11 @@ func GetBasicJson(url string) (BASIC, error) {
 
 	resp, err := http.Get(url)
 	if err != nil {
-		return *basic, err
+		return *basic, errors.New("get")
 	}
 	defer resp.Body.Close()
 	if err := json.NewDecoder(resp.Body).Decode(basic); err != nil {
-		return *basic, err
+		return *basic, errors.New("decoder")
 	}
 	return *basic, nil
 

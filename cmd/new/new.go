@@ -19,6 +19,7 @@ var NewCmd = &cobra.Command{
 		fmt.Println("new called")
 	},
 }
+var foo string
 
 func init() {
 	NewCmd.AddCommand(cmd.BasicCmd)
@@ -26,7 +27,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// newCmd.PersistentFlags().String("foo", "", "A help for foo")
+	NewCmd.PersistentFlags().StringVarP(&foo, "foo", "f", "default", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:

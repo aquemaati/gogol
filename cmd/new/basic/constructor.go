@@ -10,9 +10,9 @@ import (
 // Launch aswell comandlines
 func CreateFilesAndPackages(subdirs []Subdirectory, name string) error {
 	for _, subdir := range subdirs {
-		fmt.Printf("Package: %s\n", subdir.Name)
+		fmt.Printf("+++> Creating directory : %s\n", subdir.Name)
 		if err := os.Mkdir(subdir.Name, 0777); err != nil {
-			return fmt.Errorf("can't create the directory %s", subdir.Name)
+			return fmt.Errorf("ERROR: can't create the directory %s", subdir.Name)
 		}
 		// Changing directory
 		if err := os.Chdir(subdir.Name); err != nil {
@@ -20,13 +20,13 @@ func CreateFilesAndPackages(subdirs []Subdirectory, name string) error {
 		}
 
 		for _, file := range subdir.Files {
-			fmt.Printf("File: %s\n", file.Name)
+			fmt.Printf("+++> Creating file : %s\n", file.Name)
 			// Create file
 			fil, err := os.Create(file.Name)
 			if err != nil {
 				return fmt.Errorf("%s can't be created", file.Name)
 			}
-			fmt.Printf("%s has been created\n", file.Name)
+			//fmt.Printf("%s has been created\n", file.Name)
 			defer fil.Close()
 
 			text := strings.ReplaceAll(file.Content, "%s", name)
