@@ -22,6 +22,7 @@ func LangIsInstalled(s string, cmdLang []string) (bool, error) {
 			fmt.Println(err, "1")
 			return false, err
 		}
+		// TODO adapt to architecture
 		if strings.Contains(string(out), "not found") {
 			fmt.Println(err)
 			return false, nil

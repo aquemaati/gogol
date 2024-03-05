@@ -21,6 +21,9 @@ var BasicCmd = &cobra.Command{
 	Short: "Create a simple project to learn or test ideas",
 	Long:  `Language avaiable : go, python, julia, ...`,
 	Run: func(cmd *cobra.Command, args []string) {
+		// FLag test
+
+		//		log.Fatalln(dep, len(dep))
 		fmt.Println("")
 		fmt.Println("Creating a", cmd.Use, name, "application with", lang, "programming language...")
 		fmt.Println("")
@@ -71,27 +74,53 @@ var BasicCmd = &cobra.Command{
 
 		//STEP 6
 		// Execute precommand
-		// TODO create condition for dependancies
-		for imap, cm := range basic.PreCmd {
-			for i, v := range cm {
-				if v == "%s" {
-					basic.PreCmd[imap][i] = name
+		// TODO create conditions for type of commands => create a switch ?
+
+		for key, cm := range basic.PreCmd {
+			if key == "init" {
+				for i, v := range cm {
+					if v == "%s" {
+						basic.PreCmd[key][i] = name
+					}
+				}
+				executeCommand(cm)
+			}
+			if key == "dep" {
+				for _, d := range dep {
+					cm = append(cm, d)
+					executeCommand(cm)
 				}
 			}
-			fmt.Println("")
-			fmt.Print("***> Executing command : ")
-			out, err := exec.Command(cm[0], cm[1:]...).CombinedOutput()
-			if err != nil {
-				fmt.Println(string(out))
-				fmt.Println("ERROR : while executing commands")
-				log.Fatalln(err)
-			}
-			for _, s := range cm {
-				fmt.Print(s, " ")
-			}
-			fmt.Println("")
-			fmt.Println(string(out))
 		}
+		// for id := range dep {
+		// 	if key == "dep" && len(dep) > 0 {
+		// 		for i, v := range cm {
+		// 			if v == "%s" {
+		// 				if len(dep) > 0 {
+		// 					basic.PreCmd[key][i] = dep[id]
+		// 					continue
+		// 				}
+		// 			}
+		// 		}
+		// 	} else if key == "dep" && len(dep) == 0 {
+		// 		break
+		// 	}
+		// 	executeCommand(cm)
+		// }
+
+		// fmt.Println("")
+		// fmt.Print("***> Executing command : ")
+		// out, err := exec.Command(cm[0], cm[1:]...).CombinedOutput()
+		// if err != nil {
+		// 	fmt.Println("\n", string(out))
+		// 	fmt.Println("ERROR : while executing commands")
+		// 	log.Fatalln(err)
+		// }
+		// for _, s := range cm {
+		// 	fmt.Print(s, " ")
+		// }
+		// fmt.Println("")
+		// fmt.Println(string(out))
 
 		// STEP 7
 		// Create files and write inside
@@ -118,11 +147,38 @@ var BasicCmd = &cobra.Command{
 		fmt.Println("end instuctions")
 	},
 }
+
 var lang, name string
+var dep []string
 
 func init() {
 	// Here you will define your flags and configuration settings.
 
 	BasicCmd.Flags().StringVarP(&lang, "lang", "l", "none", "Specify the programming language")
 	BasicCmd.Flags().StringVarP(&name, "name", "n", "project", "Specify the name")
+	BasicCmd.Flags().StringArrayVarP(&dep, "dep", "d", []string{}, "specify dependacies")
+}
+
+func executeCommand(cm []string) {
+	fmt.Println("")
+	fmt.Print("***> Executing command : ")
+
+	// Exécute la commande et récupère la sortie combinée
+	out, err := exec.Command(cm[0], cm[1:]...).CombinedOutput()
+
+	// Vérifie s'il y a une erreur lors de l'exécution de la commande
+	if err != nil {
+		fmt.Println("\n", string(out))
+		fmt.Println("ERROR : while executing commands")
+		log.Fatalln(err)
+	}
+
+	// Affiche la commande exécutée
+	for _, s := range cm {
+		fmt.Print(s, " ")
+	}
+	fmt.Println("")
+
+	// Affiche la sortie de la commande
+	fmt.Println("\n", string(out))
 }
