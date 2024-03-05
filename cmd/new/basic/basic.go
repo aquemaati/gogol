@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strings"
 
@@ -115,6 +116,29 @@ var BasicCmd = &cobra.Command{
 		fmt.Println("")
 
 		// STEP 9
+		// Add more files as asked by the user with parent directories
+		// Back to main repertory
+		if err := ChangeToParentDirectoryWithSpecificName(name); err != nil {
+			log.Fatalln(err)
+		}
+		fmt.Println("files to add", addf)
+		for _, filePath := range addf {
+
+			err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm)
+			if err != nil {
+				fmt.Println("Erreur lors de la création des répertoires parents:", err)
+				return
+			}
+			// Crée le fichier
+			file, err := os.Create(filePath)
+			if err != nil {
+				fmt.Println("Erreur lors de la création du fichier:", err)
+				return
+			}
+			fmt.Printf("+++> Creating file : %s\n", filePath)
+			defer file.Close()
+		}
+
 		// SAY everything went ok
 		fmt.Println("CONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
 		// Print last instructions
@@ -125,14 +149,14 @@ var BasicCmd = &cobra.Command{
 }
 
 var lang, name string
-var dep []string
+var dep, addf []string
 
 func init() {
 	// Here you will define your flags and configuration settings.
-
 	BasicCmd.Flags().StringVarP(&lang, "lang", "l", "none", "Specify the programming language")
 	BasicCmd.Flags().StringVarP(&name, "name", "n", "project", "Specify the name")
 	BasicCmd.Flags().StringArrayVarP(&dep, "dep", "d", []string{}, "specify dependacies")
+	BasicCmd.Flags().StringArrayVarP(&addf, "addf", "", []string{}, "specify file to add")
 }
 
 func executeCommand(cm []string) {
@@ -157,4 +181,39 @@ func executeCommand(cm []string) {
 
 	// Affiche la sortie de la commande
 	fmt.Println("\n", string(out))
+}
+
+func ChangeToParentDirectoryWithSpecificName(targetDir string) error {
+	// Get the absolute path of the current directory
+	currentDir, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	// Iterate through parent directories until the target directory is found
+	for {
+		// Check if the current directory is the target directory
+		if filepath.Base(currentDir) == targetDir {
+			// If so, you are in the correct directory, no need to go further up
+			break
+		}
+
+		// Move up one directory level
+		parentDir := filepath.Dir(currentDir)
+		if parentDir == currentDir {
+			// If the current directory is already the root, stop the search
+			return fmt.Errorf("target directory not found: %s", targetDir)
+		}
+
+		// Update the current directory to the parent directory
+		currentDir = parentDir
+	}
+
+	// Change the working directory to the target directory
+	if err := os.Chdir(currentDir); err != nil {
+		return err
+	}
+
+	fmt.Println("Working directory updated:", currentDir)
+	return nil
 }
