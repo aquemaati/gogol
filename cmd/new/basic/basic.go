@@ -74,7 +74,6 @@ var BasicCmd = &cobra.Command{
 
 		//STEP 6
 		// Execute precommand
-		// TODO create conditions for type of commands => create a switch ?
 
 		for key, cm := range basic.PreCmd {
 			if key == "init" {
@@ -117,7 +116,7 @@ var BasicCmd = &cobra.Command{
 
 		// STEP 9
 		// SAY everything went ok
-		fmt.Println("CONGRATULATION", cmd.Use, name, "Has been created succesfully!!!")
+		fmt.Println("CONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
 		// Print last instructions
 		for _, v := range basic.EndInstruction {
 			fmt.Println("\t\t", v)
