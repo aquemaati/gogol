@@ -1,0 +1,44 @@
+{
+     "description": "This C++ project is a basic application structure with predefined setup instructions and directory organization. It includes a main C++ file (main.cpp) serving as the entry point for executable applications, along with a corresponding test file (test.cpp) for testing the application logic. The project also includes a simple class definition (MyClass) in a header file (myclass.h) and its implementation (myclass.cpp) for demonstration purposes. The provided setup instructions include commands for compiling, running, and testing the program.",
+     "precmd": {
+         "init": [],
+         "dep": []
+     },
+     "files": [
+         {
+             "name": "main.cpp",
+             "description": "main.cpp file in a C++ project serves as the designated entry point for executable applications, facilitating clarity, organization, and executable output generation.",
+             "content": "// Main entry point of the program\n#include <iostream>\n#include \"myclass.h\"\n\nint main() {\n    MyClass obj;\n    obj.display();\n    return 0;\n}"
+         },
+         {
+             "name": "test.cpp",
+             "description": "test.cpp file in a C++ project serves as a convention for writing tests for the corresponding main.cpp file, facilitating separate testing of the application logic, ensuring code quality, and supporting test-driven development practices.",
+             "content": "// Test file for main.cpp\n#include <iostream>\n\nint main() {\n    // Write your tests here\n    return 0;\n}"
+         }
+     ],
+     "subdirectories": [
+         {
+             "name": "src",
+             "description": "Creating a directory named `src` in a C++ project serves as a convention for organizing source files, promoting modularity, code reusability, and maintainability in C++ projects.",
+             "files": [
+                 {
+                     "name": "myclass.h",
+                     "description": "myclass.h file inside the src directory of a C++ project contains class declaration and documentation, adhering to the convention for organizing classes within the project's source code ecosystem.",
+                     "content": "// Header file for MyClass class\n#ifndef MYCLASS_H\n#define MYCLASS_H\n\n#include <iostream>\n\nclass MyClass {\npublic:\n    void display() {\n        std::cout << \"Hello from MyClass!\" << std::endl;\n    }\n};\n\n#endif"
+                 },
+                 {
+                     "name": "myclass.cpp",
+                     "description": "myclass.cpp file inside the src directory of a C++ project contains class member function implementations, adhering to the convention for organizing classes within the project's source code ecosystem.",
+                     "content": "// Implementation of MyClass class\n#include \"myclass.h\"\n\n// No implementation needed for this simple class"
+                 }
+             ]
+         }
+     ],
+     "postcmd": {},
+     "endinstruction": [
+         "To compile your program: g++ -o output main.cpp src/myclass.cpp",
+         "To run your program: ./output",
+         "To test your program: Write your tests in test.cpp and compile/run them separately"
+     ]
+ }
+ 

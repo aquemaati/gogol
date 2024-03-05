@@ -77,19 +77,20 @@ var BasicCmd = &cobra.Command{
 		// Execute precommand
 
 		for key, cm := range basic.PreCmd {
-			if key == "init" {
+			if key == "init" && len(cm) != 0 {
 				for i, v := range cm {
 					if v == "%s" {
 						basic.PreCmd[key][i] = name
 					}
 				}
 				executeCommand(cm)
-			}
-			if key == "dep" {
+			} else if key == "dep" && len(cm) != 0 {
 				for _, d := range dep {
 					cm = append(cm, d)
 					executeCommand(cm)
 				}
+			} else {
+				continue
 			}
 		}
 

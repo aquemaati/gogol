@@ -18,13 +18,13 @@
                     "linksetup": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/zig/zig_setup.json"
                },
                {
-                    "name": "julia",
-                    "link": "http",
+                    "name": "c++",
+                    "link": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/cpp/basic/cpp_basic.json",
                     "linksetup": ""
                },
                {
                     "name": "c",
-                    "link": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/C/basic/c_basic.json",
+                    "link": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/c/basic/c_basic.json",
                     "linksetup": ""
                }
           ]
