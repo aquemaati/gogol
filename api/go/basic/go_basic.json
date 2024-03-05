@@ -55,5 +55,10 @@
                "cmd": []
           }
      ], 
-     "postcmd":{}
+     "postcmd":{},
+     "endinstruction": [
+          "To run your program : go run .",
+          "To test your program : go test ./...",
+          "To build your program : go build"
+     ]
 }

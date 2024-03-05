@@ -11,6 +11,8 @@ type BASIC struct {
 	PreCmd         map[string][]string `json:"precmd"`
 	Files          []File              `json:"files"`
 	Subdirectories []Subdirectory      `json:"subdirectories"`
+	PostCmd        map[string][]string `json:"postcmd"`
+	EndInstruction []string            `json:"endinstruction"`
 }
 
 type File struct {

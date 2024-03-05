@@ -92,35 +92,6 @@ var BasicCmd = &cobra.Command{
 				}
 			}
 		}
-		// for id := range dep {
-		// 	if key == "dep" && len(dep) > 0 {
-		// 		for i, v := range cm {
-		// 			if v == "%s" {
-		// 				if len(dep) > 0 {
-		// 					basic.PreCmd[key][i] = dep[id]
-		// 					continue
-		// 				}
-		// 			}
-		// 		}
-		// 	} else if key == "dep" && len(dep) == 0 {
-		// 		break
-		// 	}
-		// 	executeCommand(cm)
-		// }
-
-		// fmt.Println("")
-		// fmt.Print("***> Executing command : ")
-		// out, err := exec.Command(cm[0], cm[1:]...).CombinedOutput()
-		// if err != nil {
-		// 	fmt.Println("\n", string(out))
-		// 	fmt.Println("ERROR : while executing commands")
-		// 	log.Fatalln(err)
-		// }
-		// for _, s := range cm {
-		// 	fmt.Print(s, " ")
-		// }
-		// fmt.Println("")
-		// fmt.Println(string(out))
 
 		// STEP 7
 		// Create files and write inside
@@ -143,8 +114,14 @@ var BasicCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 		fmt.Println("")
+
+		// STEP 9
+		// SAY everything went ok
 		fmt.Println("CONGRATULATION", cmd.Use, name, "Has been created succesfully!!!")
-		fmt.Println("end instuctions")
+		// Print last instructions
+		for _, v := range basic.EndInstruction {
+			fmt.Println("\t\t", v)
+		}
 	},
 }
 
