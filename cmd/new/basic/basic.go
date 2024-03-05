@@ -32,7 +32,7 @@ var BasicCmd = &cobra.Command{
 		// STEP 1
 		// get general datas for basics projects with the
 		// programming language selected
-		fmt.Println("---> Fetching datas for", cmd.Use, "app with", lang, "Programming language")
+		fmt.Println("@@@> Fetching datas for", cmd.Use, "app with", lang, "Programming language")
 		data, err := tools.GetDatas("basic", lang)
 		if err != nil {
 			log.Fatalln(err)
@@ -41,7 +41,7 @@ var BasicCmd = &cobra.Command{
 		// STEP 2
 		// get command to check if the programming language
 		// is properly installed
-		fmt.Println("---> Checking if your os has the requirements for", lang, "programming languages")
+		fmt.Println(":::> Checking if your os has the requirements for", lang, "programming languages")
 		setUp, _ := tools.GetCmdCheckInstall(data.LinkSetup)
 
 		// STEP 3
@@ -67,7 +67,7 @@ var BasicCmd = &cobra.Command{
 
 		// STEP 5
 		// get json instructions
-		fmt.Println("---> Fetching", lang, cmd.Use, "instructions")
+		fmt.Println("@@@> Fetching", lang, cmd.Use, "instructions")
 		basic, err := GetBasicJson(data.Link)
 		if err != nil {
 			log.Fatalln(err)
