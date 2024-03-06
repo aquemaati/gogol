@@ -17,8 +17,8 @@ import (
 
 // This structure interprent a yaml file setup
 type CheckConfig struct {
-	CheckCommand map[string]string              `yaml:"check_command"`
-	Instructions map[string]map[string][]string `yaml:"instructions"`
+	CheckCommand map[string]string                         `yaml:"check_command"`
+	Instructions map[string]map[string][]map[string]string `yaml:"instructions"`
 }
 
 // We want to be sure that the programming language is well installed
@@ -96,20 +96,26 @@ func IsURL(input string) bool {
 // install requirements, he can select multiple choices
 func HandleSetUp(ops, arch string, config CheckConfig) {
 	for i, v := range config.Instructions[ops][arch] {
-		fmt.Println(i+1, v)
+		for key, mp := range v {
+			fmt.Println(i, key, mp)
+		}
+
+		// 	err := OpenWebpage(config.Instructions[ops][arch][selected-1])
+		// 	if err != nil {
+		// 		log.Fatalln(err)
+		// 	}
+		// }
 	}
 	var num string
-	fmt.Println("select")
+	fmt.Println("select an option")
 	fmt.Scanf("%s", &num)
 
 	selected, _ := strconv.Atoi(num)
 
-	switch {
-	case selected-1 >= 0 && selected-1 <= len(config.Instructions[ops][arch]) && IsURL(config.Instructions[ops][arch][selected-1]):
-
-		err := OpenWebpage(config.Instructions[ops][arch][selected-1])
-		if err != nil {
-			log.Fatalln(err)
+	for key, v := range config.Instructions[ops][arch][selected] {
+		if key == "link" {
+			OpenWebpage(v)
 		}
 	}
+
 }
