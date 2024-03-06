@@ -88,15 +88,18 @@ func IsURL(input string) bool {
 	return true
 }
 func HandleSetUp(ops, arch string, config CheckConfig) {
+	for i, v := range config.Instructions[ops][arch] {
+		fmt.Println(i+1, v)
+	}
 	var num string
 	fmt.Println("select")
 	fmt.Scanf("%s", &num)
 
 	selected, _ := strconv.Atoi(num)
-	fmt.Println(len(config.Instructions[ops][arch]))
+
 	switch {
 	case selected-1 >= 0 && selected-1 <= len(config.Instructions[ops][arch]) && IsURL(config.Instructions[ops][arch][selected-1]):
-		fmt.Println("selected")
+
 		err := OpenWebpage(config.Instructions[ops][arch][selected-1])
 		if err != nil {
 			log.Fatalln(err)
