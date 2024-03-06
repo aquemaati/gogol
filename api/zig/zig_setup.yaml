@@ -1,0 +1,27 @@
+check_command:
+  darwin: command -v zig
+  linux: command -v zig
+  windows: where zig
+
+instructions:
+  darwin:
+    amd64:
+      - brew install zig
+      - https://ziglang.org/download/
+    arm64:
+      - brew install zig
+      - https://ziglang.org/download/
+  linux:
+    amd64:
+      - sudo apt-get install zig
+      - https://ziglang.org/download/
+    arm64:
+      - sudo apt-get install zig
+      - https://ziglang.org/download/
+  windows:
+    amd64:
+      - choco install zig
+      - https://ziglang.org/download/
+    x86:
+      - choco install zig
+      - https://ziglang.org/download/
