@@ -99,13 +99,8 @@ func HandleSetUp(ops, arch string, config CheckConfig) error {
 		for key, mp := range v {
 			fmt.Println(i, key, mp)
 		}
-
-		// 	err := OpenWebpage(config.Instructions[ops][arch][selected-1])
-		// 	if err != nil {
-		// 		log.Fatalln(err)
-		// 	}
-		// }
 	}
+
 	var num string
 	fmt.Println("select an option")
 	fmt.Scanf("%s", &num)
