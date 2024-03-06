@@ -1,3 +1,4 @@
+---
 check_command:
   darwin: command -v ghc
   linux: command -v ghc

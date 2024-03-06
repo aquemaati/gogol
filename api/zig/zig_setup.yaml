@@ -1,3 +1,4 @@
+---
 check_command:
   darwin: command -v zig
   linux: command -v zig
