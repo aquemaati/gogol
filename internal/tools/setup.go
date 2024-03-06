@@ -24,7 +24,7 @@ type CheckConfig struct {
 // We want to be sure that the programming language is well installed
 func LangIsInstalled(s string) (string, bool, error) {
 	cmdLang := strings.Split(s, " ")
-	if len(cmdLang) > 1 {
+	if len(cmdLang) < 1 {
 		return "", false, errors.New("bad command")
 	}
 	cmd := exec.Command(cmdLang[0], cmdLang[1:]...)
