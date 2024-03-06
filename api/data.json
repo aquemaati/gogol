@@ -26,6 +26,11 @@
                     "name": "c",
                     "link": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/c/basic/c_basic.json",
                     "linksetup": ""
+               },
+               {
+                    "name": "haskell",
+                    "link": "",
+                    "linksetup": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/haskell/haskell_setup.yaml"
                }
           ]
      }

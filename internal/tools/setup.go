@@ -3,7 +3,7 @@ package tools
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -15,6 +15,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// This structure interprent a yaml file setup
 type CheckConfig struct {
 	CheckCommand map[string]string              `yaml:"check_command"`
 	Instructions map[string]map[string][]string `yaml:"instructions"`
@@ -50,7 +51,7 @@ func GetCmdCheckInstall(url string) (CheckConfig, error) {
 		return *setUp, err
 	}
 	defer resp.Body.Close()
-	yamlData, err := ioutil.ReadAll(resp.Body)
+	yamlData, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return *setUp, err
 	}
@@ -62,6 +63,7 @@ func GetCmdCheckInstall(url string) (CheckConfig, error) {
 	return *setUp, nil
 }
 
+// This function can open a webpage
 func OpenWebpage(url string) error {
 	var err error
 	switch runtime.GOOS {
@@ -76,6 +78,8 @@ func OpenWebpage(url string) error {
 	}
 	return err
 }
+
+// This function check if a string is an url
 func IsURL(input string) bool {
 	_, err := url.ParseRequestURI(input)
 	if err != nil {
@@ -87,6 +91,9 @@ func IsURL(input string) bool {
 	}
 	return true
 }
+
+// This function allow the usr to dowload what he need to
+// install requirements, he can select multiple choices
 func HandleSetUp(ops, arch string, config CheckConfig) {
 	for i, v := range config.Instructions[ops][arch] {
 		fmt.Println(i+1, v)
