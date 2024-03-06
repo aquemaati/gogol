@@ -6,7 +6,10 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"os/exec"
+	"runtime"
+	"strconv"
 	"strings"
 
 	"gopkg.in/yaml.v2"
@@ -57,4 +60,46 @@ func GetCmdCheckInstall(url string) (CheckConfig, error) {
 	}
 
 	return *setUp, nil
+}
+
+func OpenWebpage(url string) error {
+	var err error
+	switch runtime.GOOS {
+	case "linux":
+		err = exec.Command("xdg-open", url).Start()
+	case "windows":
+		err = exec.Command("cmd", "/c", "start", url).Start()
+	case "darwin":
+		err = exec.Command("open", url).Start()
+	default:
+		err = fmt.Errorf("unsupported platform")
+	}
+	return err
+}
+func IsURL(input string) bool {
+	_, err := url.ParseRequestURI(input)
+	if err != nil {
+		return false
+	}
+	u, err := url.Parse(input)
+	if err != nil || u.Scheme == "" || u.Host == "" {
+		return false
+	}
+	return true
+}
+func HandleSetUp(ops, arch string, config CheckConfig) {
+	var num string
+	fmt.Println("select")
+	fmt.Scanf("%s", &num)
+
+	selected, _ := strconv.Atoi(num)
+	fmt.Println(len(config.Instructions[ops][arch]))
+	switch {
+	case selected-1 >= 0 && selected-1 <= len(config.Instructions[ops][arch]) && IsURL(config.Instructions[ops][arch][selected-1]):
+		fmt.Println("selected")
+		err := OpenWebpage(config.Instructions[ops][arch][selected-1])
+		if err != nil {
+			log.Fatalln(err)
+		}
+	}
 }

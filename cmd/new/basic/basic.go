@@ -47,13 +47,15 @@ var BasicCmd = &cobra.Command{
 		// STEP 3
 		// check if the language is wel installed, if not
 		// Show the what the user have to do
-		outs, f, _ := tools.LangIsInstalled("command -v go")
-		if !f {
-			arch := runtime.GOARCH
-			// TODO check as well with runtime.goose ans update json
-			log.Fatalln("ERROR :", lang, "programming language not installed", "go to ", setUp.Instructions[arch], "to download it for", runtime.GOARCH)
-		}
+		arch := runtime.GOARCH
+		ops := runtime.GOOS
+		outs, f, _ := tools.LangIsInstalled(setUp.CheckCommand[ops])
 		fmt.Println(outs)
+		if !f {
+			// TODO check as well with runtime.goose ans update json
+			fmt.Println("ERROR :", lang, "programming language not installed download it for", ops, arch)
+			tools.HandleSetUp(ops, arch, setUp)
+		}
 
 		// STEP 4
 		// create de root directory for the project and then go inside

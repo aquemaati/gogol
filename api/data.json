@@ -15,7 +15,7 @@
                {
                     "name": "zig",
                     "link": "http",
-                    "linksetup": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/zig/zig_setup.json"
+                    "linksetup": "https://raw.githubusercontent.com/aquemaati/gogol/main/api/zig/zig_setup.yaml"
                },
                {
                     "name": "c++",
