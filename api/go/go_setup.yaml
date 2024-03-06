@@ -6,24 +6,24 @@ check_command:
 instructions:
   darwin:
     amd64:
-      - brew install golang
-      - https://go.dev/dl/
+      - command: brew install golang
+      - link: https://go.dev/dl/
     arm64:
-      - brew install golang
-      - https://go.dev/dl/
+      - command: brew install golang
+      - link: https://go.dev/dl/
 
   linux:
     amd64:
-      - sudo apt-get install golang
-      - https://go.dev/dl/
+      - command: sudo apt-get install golang
+      - link: https://go.dev/dl/
     arm64:
-      - sudo apt-get install golang
-      - https://go.dev/dl/
+      - command: sudo apt-get install golang
+      - link: https://go.dev/dl/
 
   windows:
     amd64:
-      - choco install golang
-      - https://go.dev/dl/
+      - command: choco install golang
+      - link: https://go.dev/dl/
     x86:
-      - choco install golang
-      - https://go.dev/dl/
+      - command: choco install golang
+      - link: https://go.dev/dl/
