@@ -94,7 +94,7 @@ func IsURL(input string) bool {
 
 // This function allow the usr to dowload what he need to
 // install requirements, he can select multiple choices
-func HandleSetUp(ops, arch string, config CheckConfig) {
+func HandleSetUp(ops, arch string, config CheckConfig) error {
 	for i, v := range config.Instructions[ops][arch] {
 		for key, mp := range v {
 			fmt.Println(i, key, mp)
@@ -113,9 +113,19 @@ func HandleSetUp(ops, arch string, config CheckConfig) {
 	selected, _ := strconv.Atoi(num)
 
 	for key, v := range config.Instructions[ops][arch][selected] {
-		if key == "link" {
+		switch key {
+		case "link":
 			OpenWebpage(v)
+		case "command":
+			args := strings.Split(v, " ")
+			cmd := exec.Command(args[0], args[1:]...)
+			out, err := cmd.CombinedOutput()
+			if err != nil {
+				return err
+			}
+			fmt.Println(string(out))
 		}
-	}
 
+	}
+	return nil
 }

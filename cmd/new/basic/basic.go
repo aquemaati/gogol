@@ -22,9 +22,7 @@ var BasicCmd = &cobra.Command{
 	Short: "Create a simple project to learn or test ideas",
 	Long:  `Language avaiable : go, python, julia, ...`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// FLag test
 
-		//		log.Fatalln(dep, len(dep))
 		fmt.Println("")
 		fmt.Printf("\033[1;32m%s\033[0m", "Creating a "+cmd.Use+" "+name+" application with "+lang+" programming language...\n")
 		fmt.Println("")
@@ -56,8 +54,12 @@ var BasicCmd = &cobra.Command{
 			fmt.Printf("\033[1;33mERROR:\033[0m %s programming language not installed, download it for %s %s\n", lang, ops, arch)
 
 			// allow the user to download what he need
-			tools.HandleSetUp(ops, arch, setUp)
-			return
+			// TODO check if brew or choco is installed
+			err := tools.HandleSetUp(ops, arch, setUp)
+			if err != nil {
+				fmt.Println(err, "could not install properly the programming language")
+				return
+			}
 		}
 
 		// STEP 4
