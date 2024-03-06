@@ -32,7 +32,7 @@ var BasicCmd = &cobra.Command{
 		// STEP 1
 		// get general datas for basics projects with the
 		// programming language selected
-		fmt.Println("@@@> Fetching datas for", cmd.Use, "app with", lang, "Programming language")
+		fmt.Println("\033[34m@@@> Fetching datas for", cmd.Use, "app with", lang, "Programming language\033[0m")
 		data, err := tools.GetDatas("basic", lang)
 		if err != nil {
 			log.Fatalln(err)
