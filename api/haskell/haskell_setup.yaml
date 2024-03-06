@@ -6,24 +6,25 @@ check_command:
 instructions:
   darwin:
     amd64:
-      - brew install haskell-stack
-      - https://www.haskell.org/ghcup/#
+      - command: brew install haskell-stack
+      - link: https://www.haskell.org/ghcup/#
     arm64:
-      - brew install haskell-stack
-      - https://www.haskell.org/ghcup/#
+      - command: brew install haskell-stack
+      - command: echo testofcommand
+      - link: https://www.haskell.org/ghcup/#
 
   linux:
     amd64:
-      - sudo apt-get install haskell-platform
-      - https://www.haskell.org/ghcup/#
+      - command: sudo apt-get install haskell-platform
+      - link: https://www.haskell.org/ghcup/#
     arm64:
-      - sudo apt-get install haskell-platform
-      - https://www.haskell.org/ghcup/#
+      - command: sudo apt-get install haskell-platform
+      - link: https://www.haskell.org/ghcup/#
 
   windows:
     amd64:
-      - choco install haskell-stack
-      - https://www.haskell.org/ghcup/#
+      - command: choco install haskell-stack
+      - link: https://www.haskell.org/ghcup/#
     x86:
-      - choco install haskell-stack
-      - https://www.haskell.org/ghcup/#
+      - command: choco install haskell-stack
+      - link: https://www.haskell.org/ghcup/#
