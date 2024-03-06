@@ -46,15 +46,18 @@ var BasicCmd = &cobra.Command{
 
 		// STEP 3
 		// check if the language is wel installed, if not
-		// Show the what the user have to do
+		// Show what the user have to do
 		arch := runtime.GOARCH
 		ops := runtime.GOOS
 		outs, f, _ := tools.LangIsInstalled(setUp.CheckCommand[ops])
 		fmt.Println(outs)
 		if !f {
-			// TODO check as well with runtime.goose ans update json
-			fmt.Println("ERROR :", lang, "programming language not installed download it for", ops, arch)
+
+			fmt.Printf("\033[1;33mERROR:\033[0m %s programming language not installed, download it for %s %s\n", lang, ops, arch)
+
+			// allow the user to download what he need
 			tools.HandleSetUp(ops, arch, setUp)
+			return
 		}
 
 		// STEP 4
