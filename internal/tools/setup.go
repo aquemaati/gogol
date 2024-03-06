@@ -38,7 +38,6 @@ func LangIsInstalled(s string) (string, bool, error) {
 		fmt.Println(err, "not installed")
 		return string(out), false, nil
 	}
-
 	return string(out), true, nil
 }
 
@@ -120,7 +119,6 @@ func HandleSetUp(ops, arch string, config CheckConfig) error {
 			}
 			fmt.Println(string(out))
 		}
-
 	}
 	return nil
 }
