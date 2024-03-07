@@ -39,7 +39,7 @@ var BasicCmd = &cobra.Command{
 
 		// STEP 3: Check if the language is installed properly; show instructions if not
 		arch := runtime.GOARCH // Architecture of the user computer
-		ops := runtime.GOOS // OS of the user
+		ops := runtime.GOOS    // OS of the user
 		outs, f, err := tools.LangIsInstalled(setUp.CheckCommand[ops], lang)
 		if err != nil {
 			fmt.Println(messages.ERR, err)
@@ -96,6 +96,8 @@ var BasicCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 
+		// TODO NEW STEP : ask if the user wants to create a repo on github, and init a git
+		// Then create steps, ands ask user enter information or dowllad github cli, then config users settinfs
 		// STEP 10: Print final instructions
 		fmt.Println(messages.Congrat(cmd.Use, name, lang))
 		fmt.Print("\t\t - Access your new directory: cd ", name, "\n")
