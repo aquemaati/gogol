@@ -24,7 +24,7 @@ var BasicCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		fmt.Println("")
-		fmt.Printf("\033[1;32m%s\033[0m", "Creating a "+cmd.Use+" "+name+" application with "+lang+" programming language...\n")
+		fmt.Printf("🚀🚀 \033[1;32m%s\033[0m", "Creating a "+cmd.Use+" "+name+" application with "+lang+" programming language...🚀🚀\n")
 		fmt.Println("")
 
 		// STEP 1
