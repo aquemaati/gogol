@@ -44,6 +44,7 @@ func CreateFilesAndPackages(subdirs []Subdirectory, name string) error {
 	return nil
 }
 
+// TODO : rearrange this
 func ExecutePreCommands(preCmd map[string][]string, name string) error {
 	// Execute pre-commands
 	for key, cm := range preCmd {

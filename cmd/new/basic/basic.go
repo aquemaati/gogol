@@ -26,22 +26,30 @@ var BasicCmd = &cobra.Command{
 		// STEP 1: Get general data for basic projects with the selected programming language
 		data, err := tools.GetDatas("basic", lang)
 		if err != nil {
-			log.Fatalln(err)
+			fmt.Println(messages.ErrFetch(lang), err)
+			return
 		}
 
 		// STEP 2: Get command to check if the programming language is properly installed
-		setUp, _ := tools.GetCmdCheckInstall(data.LinkSetup)
+		setUp, err := tools.GetCmdCheckInstall(data.LinkSetup)
+		if err != nil {
+			fmt.Println(messages.ErrFetch(data.LinkSetup), err)
+			return
+		}
 
 		// STEP 3: Check if the language is installed properly; show instructions if not
 		arch := runtime.GOARCH
 		ops := runtime.GOOS
-		outs, f, _ := tools.LangIsInstalled(setUp.CheckCommand[ops], lang)
+		outs, f, err := tools.LangIsInstalled(setUp.CheckCommand[ops], lang)
+		if err != nil {
+			fmt.Println(messages.ERR, err)
+		}
 		fmt.Println(outs)
 		if !f {
 			fmt.Println(messages.ErrLangInstall(lang, ops, arch))
 			err := tools.HandleSetUp(ops, arch, setUp)
 			if err != nil {
-				fmt.Println(err, "could not install the programming language properly")
+				fmt.Println(messages.ERR, err, "could not install the programming language properly")
 				return
 			}
 		}
@@ -49,16 +57,17 @@ var BasicCmd = &cobra.Command{
 		// STEP 4: Create the root directory for the project and navigate inside
 		fmt.Println(messages.DirBuilding(name))
 		if err := os.Mkdir(name, 0777); err != nil {
-			log.Fatalln(err)
+			fmt.Println(messages.ErrDir(name), err)
+			return
 		}
 		if err := os.Chdir(name); err != nil {
-			log.Fatalln(err)
+			log.Fatalln(messages.ERR, err)
 		}
 
 		// STEP 5: Get JSON instructions
 		basic, err := GetBasicJson(data.Link)
 		if err != nil {
-			log.Fatalln(err)
+			log.Fatalln(messages.ErrFetch(data.Link), err)
 		}
 
 		// STEP 6: Execute pre-commands

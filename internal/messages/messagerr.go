@@ -4,13 +4,14 @@ import "fmt"
 
 // ERROR
 const (
-	ERR     = "\033[1;33m🚨🥶 ERROR:\033[0m "
-	DIR     = "%sDirectory %s can't be created"
-	FILE    = "%sFile %s can't be created"
-	LANGINS = "%s%s programming language is not installed on your computer(%s, %s)"
-	LANGAV  = "%s%s programming language is not yet avaiable with gogol"
-	TYPEAV  = "%sThe %s kind is not avaiable with golang"
-	EXERR   = "%sCan't execut this commande: %s, output : %s"
+	ERR      = "\033[1;33m🚨🥶 ERROR:\033[0m "
+	DIR      = "%sDirectory %s can't be created --->"
+	FILE     = "%sFile %s can't be created"
+	LANGINS  = "%s%s programming language is not installed on your computer(%s, %s)"
+	LANGAV   = "%s%s programming language is not yet avaiable with gogol"
+	TYPEAV   = "%sThe %s kind is not avaiable with golang"
+	EXERR    = "%sCan't execut this commande: %s, output : %s"
+	FETCHERR = "%sCan't fetch properly datas from : %s --->"
 )
 
 // This function  return an error when a directory can't be created
@@ -44,4 +45,9 @@ func ErrKindNotAv(kind string) error {
 // Function return error when a command error happens
 func ErrExec(cmd, out string) error {
 	return fmt.Errorf(EXERR, ERR, cmd, out)
+}
+
+// Function for error Fetchin
+func ErrFetch(url string) error {
+	return fmt.Errorf(FETCHERR, ERR, url)
 }
