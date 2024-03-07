@@ -16,7 +16,7 @@ var NewCmd = &cobra.Command{
 	Short: "create a new application from scratch",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("new called")
+		fmt.Println("new called, create default user project")
 	},
 }
 var foo string

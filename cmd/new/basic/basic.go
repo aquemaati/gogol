@@ -38,8 +38,8 @@ var BasicCmd = &cobra.Command{
 		}
 
 		// STEP 3: Check if the language is installed properly; show instructions if not
-		arch := runtime.GOARCH
-		ops := runtime.GOOS
+		arch := runtime.GOARCH // Architecture of the user computer
+		ops := runtime.GOOS // OS of the user
 		outs, f, err := tools.LangIsInstalled(setUp.CheckCommand[ops], lang)
 		if err != nil {
 			fmt.Println(messages.ERR, err)
@@ -96,7 +96,7 @@ var BasicCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 
-		// Print final instructions
+		// STEP 10: Print final instructions
 		fmt.Println(messages.Congrat(cmd.Use, name, lang))
 		fmt.Print("\t\t - Access your new directory: cd ", name, "\n")
 		for _, v := range basic.EndInstruction {
