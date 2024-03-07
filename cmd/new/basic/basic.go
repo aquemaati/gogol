@@ -52,6 +52,7 @@ var BasicCmd = &cobra.Command{
 				fmt.Println(messages.ERR, err, "could not install the programming language properly")
 				return
 			}
+			return
 		}
 
 		// STEP 4: Create the root directory for the project and navigate inside
