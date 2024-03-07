@@ -25,7 +25,7 @@ type Lang struct {
 func GetDatas(kind, lang string) (Lang, error) {
 	datas := new(DATAS)
 	datal := new(Lang)
-	resp, err := http.Get("https://raw.githubusercontent.com/aquemaati/gogol/main/api/data.json")
+	resp, err := http.Get("https://raw.githubusercontent.com/aquemaati/gogol-api/main/data.json")
 	if err != nil {
 		return *datal, err
 	}

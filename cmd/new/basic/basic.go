@@ -154,6 +154,7 @@ var BasicCmd = &cobra.Command{
 		// SAY everything went ok
 		fmt.Println("\nCONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
 		// Print last instructions
+		fmt.Print("\t\t Access your new directory: cd ", name, "\n")
 		for _, v := range basic.EndInstruction {
 			fmt.Println("\t\t", v)
 		}

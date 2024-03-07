@@ -101,7 +101,7 @@ func HandleSetUp(ops, arch string, config CheckConfig) error {
 	}
 
 	var num string
-	fmt.Println("select an option")
+	fmt.Println("select an option and press enter or exit with C-c")
 	fmt.Scanf("%s", &num)
 
 	selected, _ := strconv.Atoi(num)
