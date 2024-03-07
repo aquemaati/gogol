@@ -3,6 +3,7 @@ package tools
 import (
 	"encoding/json"
 	"fmt"
+	"gogol/internal/messages"
 	"net/http"
 )
 
@@ -25,6 +26,7 @@ type Lang struct {
 func GetDatas(kind, lang string) (Lang, error) {
 	datas := new(DATAS)
 	datal := new(Lang)
+	fmt.Println(messages.Fetching("https://raw.githubusercontent.com/aquemaati/gogol-api/main/data.json"))
 	resp, err := http.Get("https://raw.githubusercontent.com/aquemaati/gogol-api/main/data.json")
 	if err != nil {
 		return *datal, err

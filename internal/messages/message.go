@@ -3,16 +3,20 @@ package messages
 import "fmt"
 
 const (
+	STARTING = "\n🚀🚀 \033[1;32mStarting a new %s application named %s with %s programming language\033[0m\n"
 	// Creating messages
-	STARTING  = "🚀🚀 \033[1;32mStarting a new %s application named %s with %s programming language\033[0m\n"
-	BUILDFILE = "🪚 Building the new file: %s\n"
-	BUILDDIR  = "🚧 Building the new directory: %s\n"
-	CONGRAT   = "💪 Congratulation, your %s application named %s with %s programming language has been created successfully \n"
-	EXECCMD   = "🔫 Executing command: %s\n%s\n"
-	SELECT    = "Selec an option or exit gogol with CTRL-c\n"
+	BUILDFILE = "🪚 Building the new file: %s"
+	BUILDDIR  = "🚧 Building the new directory: %s"
+
+	CONGRAT = "\n💪 Congratulation, your %s application named %s with %s programming language has been created successfully"
+
+	// Action
+	EXECCMD = "🔫 Executing command: %s\n%s"
+	SELECT  = "Select an option or exit gogol with CTRL-c\n"
+	CHECKOS = "\n🧐 Checking if your computer has the requirements for %s programming language"
 
 	// Fetching message
-	FETCH = "📡\033[34mFetching datas from: %s\033[0m\n"
+	FETCH = "📡 \033[34mFetching datas from: %s\033[0m"
 )
 
 // TODO Select option
@@ -20,8 +24,14 @@ func SlectOpt() string {
 	return SELECT
 }
 
+// Function return string to say binary is checking computer
+// For programming languages requirements
+func CheckLangMess(lang string) string {
+	return fmt.Sprintf(CHECKOS, lang)
+}
+
 // Function that say a new projectr is created
-func StartingProject(name, kind, lang string) string {
+func StartingProject(kind, name, lang string) string {
 	return fmt.Sprintf(STARTING, kind, name, lang)
 }
 

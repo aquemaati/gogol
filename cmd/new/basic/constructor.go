@@ -2,15 +2,17 @@ package cmd
 
 import (
 	"fmt"
+	"gogol/internal/messages"
 	"os"
 	"strings"
 )
 
-// This function use recursivity to create files and directories
+// This function use recursivity to create subfiles and subdirectories
 // Launch aswell comandlines
 func CreateFilesAndPackages(subdirs []Subdirectory, name string) error {
 	for _, subdir := range subdirs {
-		fmt.Printf("+++> Creating directory : %s\n", subdir.Name)
+		fmt.Println(messages.DirBuilding(subdir.Name))
+
 		if err := os.Mkdir(subdir.Name, 0777); err != nil {
 			return fmt.Errorf("ERROR: can't create the directory %s", subdir.Name)
 		}
@@ -20,7 +22,7 @@ func CreateFilesAndPackages(subdirs []Subdirectory, name string) error {
 		}
 
 		for _, file := range subdir.Files {
-			fmt.Printf("+++> Creating file : %s\n", file.Name)
+			fmt.Println(messages.FileBuilding(file.Name))
 			// Create file
 			fil, err := os.Create(file.Name)
 			if err != nil {

@@ -4,7 +4,7 @@ import "fmt"
 
 // ERROR
 const (
-	ERR     = "🚨🥶 ERROR: "
+	ERR     = "\033[1;33m🚨🥶 ERROR:\033[0m "
 	DIR     = "%sDirectory %s can't be created"
 	FILE    = "%sFile %s can't be created"
 	LANGINS = "%s%s programming language is not installed on your computer(%s, %s)"

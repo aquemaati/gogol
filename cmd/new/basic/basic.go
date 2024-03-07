@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"gogol/internal/messages"
 	"gogol/internal/tools"
 	"log"
 	"os"
@@ -23,14 +24,12 @@ var BasicCmd = &cobra.Command{
 	Long:  `Language avaiable : go, python, julia, ...`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("")
-		fmt.Printf("🚀🚀 \033[1;32m%s\033[0m", "Creating a "+cmd.Use+" "+name+" application with "+lang+" programming language...🚀🚀\n")
-		fmt.Println("")
+		// Sarter message
+		fmt.Println(messages.StartingProject(cmd.Use, name, lang))
 
 		// STEP 1
 		// get general datas for basics projects with the
 		// programming language selected
-		fmt.Println("\033[34m@@@> Fetching datas for", cmd.Use, "app with", lang, "Programming language\033[0m")
 		data, err := tools.GetDatas("basic", lang)
 		if err != nil {
 			log.Fatalln(err)
@@ -39,7 +38,7 @@ var BasicCmd = &cobra.Command{
 		// STEP 2
 		// get command to check if the programming language
 		// is properly installed
-		fmt.Println(":::> Checking if your os has the requirements for", lang, "programming languages")
+		//TODO include in LangIsInstalled
 		setUp, _ := tools.GetCmdCheckInstall(data.LinkSetup)
 
 		// STEP 3
@@ -47,12 +46,10 @@ var BasicCmd = &cobra.Command{
 		// Show what the user have to do
 		arch := runtime.GOARCH
 		ops := runtime.GOOS
-		outs, f, _ := tools.LangIsInstalled(setUp.CheckCommand[ops])
+		outs, f, _ := tools.LangIsInstalled(setUp.CheckCommand[ops], lang)
 		fmt.Println(outs)
 		if !f {
-
-			fmt.Printf("\033[1;33mERROR:\033[0m %s programming language not installed, download it for %s %s\n", lang, ops, arch)
-
+			fmt.Println(messages.ErrLangInstall(lang, ops, arch))
 			// allow the user to download what he need
 			// TODO check if brew or choco is installed
 			err := tools.HandleSetUp(ops, arch, setUp)
@@ -64,7 +61,7 @@ var BasicCmd = &cobra.Command{
 
 		// STEP 4
 		// create de root directory for the project and then go inside
-		fmt.Println("+++> Creating root directory", name)
+		fmt.Println(messages.DirBuilding(name))
 		if err := os.Mkdir(name, 0777); err != nil {
 			log.Fatalln(err)
 		}
@@ -75,7 +72,7 @@ var BasicCmd = &cobra.Command{
 
 		// STEP 5
 		// get json instructions
-		fmt.Println("@@@> Fetching", lang, cmd.Use, "instructions")
+
 		basic, err := GetBasicJson(data.Link)
 		if err != nil {
 			log.Fatalln(err)
@@ -92,12 +89,11 @@ var BasicCmd = &cobra.Command{
 					}
 				}
 				fmt.Println("")
-				fmt.Print(":::> Initialize")
 				executeCommand(cm)
 			} else if key == "dep" && len(cm) != 0 {
 				for _, d := range dep {
 					cm = append(cm, d)
-					fmt.Print("@@@> Catching dependency")
+					fmt.Println(messages.Fetching(d))
 					executeCommand(cm)
 				}
 			} else {
@@ -113,7 +109,8 @@ var BasicCmd = &cobra.Command{
 				log.Fatalln(err)
 			}
 			defer file.Close()
-			fmt.Printf("+++> Creating file : %s\n", f.Name)
+			// fmt.Printf("+++> Creating file : %s\n", f.Name)
+			fmt.Println(messages.FileBuilding(f.Name))
 			// Writing inside
 			text := strings.ReplaceAll(f.Content, "%s", name)
 			if _, err := file.WriteString(text); err != nil {
@@ -147,13 +144,14 @@ var BasicCmd = &cobra.Command{
 				fmt.Println("Erreur lors de la création du fichier:", err)
 				return
 			}
-			fmt.Printf("+++> Creating file : %s\n", filePath)
+			fmt.Println(messages.FileBuilding(filePath))
 			defer file.Close()
 		}
 
 		// SAY everything went ok
-		fmt.Println("\nCONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
-		// Print last instructions
+		// fmt.Println("\nCONGRATULATION", cmd.Use, name, "Has been created successfully!!!")
+		// // Print last instructions
+		fmt.Println(messages.Congrat(cmd.Use, name, lang))
 		fmt.Print("\t\t Access your new directory: cd ", name, "\n")
 		for _, v := range basic.EndInstruction {
 			fmt.Println("\t\t", v)
@@ -174,26 +172,17 @@ func init() {
 
 func executeCommand(cm []string) {
 	fmt.Println("")
-	fmt.Print("***> Executing command : ")
+	// fmt.Print("***> Executing command : ")
 
 	// Exécute la commande et récupère la sortie combinée
 	out, err := exec.Command(cm[0], cm[1:]...).CombinedOutput()
-
+	fmt.Println(messages.ExecCmd(strings.Join(cm, " "), string(out)))
 	// Vérifie s'il y a une erreur lors de l'exécution de la commande
 	if err != nil {
 		fmt.Println("\n", string(out))
 		fmt.Println("ERROR : while executing commands")
 		log.Fatalln(err)
 	}
-
-	// Affiche la commande exécutée
-	for _, s := range cm {
-		fmt.Print(s, " ")
-	}
-	//fmt.Println("")
-
-	// Affiche la sortie de la commande
-	fmt.Println("\n", string(out))
 }
 
 // allow to come back to the main directory

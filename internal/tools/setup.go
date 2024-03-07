@@ -3,6 +3,7 @@ package tools
 import (
 	"errors"
 	"fmt"
+	"gogol/internal/messages"
 	"io"
 	"log"
 	"net/http"
@@ -22,7 +23,8 @@ type CheckConfig struct {
 }
 
 // We want to be sure that the programming language is well installed
-func LangIsInstalled(s string) (string, bool, error) {
+func LangIsInstalled(s, lang string) (string, bool, error) {
+	fmt.Println(messages.CheckLangMess(lang))
 	cmdLang := strings.Split(s, " ")
 	if len(cmdLang) < 1 {
 		return "", false, errors.New("bad command")
@@ -30,8 +32,7 @@ func LangIsInstalled(s string) (string, bool, error) {
 	cmd := exec.Command(cmdLang[0], cmdLang[1:]...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Println(err, "1")
-		return string(out), false, err
+		return "", false, err
 	}
 	// TODO adapt to architecture
 	if string(out) == "" {
@@ -44,6 +45,7 @@ func LangIsInstalled(s string) (string, bool, error) {
 // function to get the command line to check if the programming language
 // is properly installed on the user'os
 func GetCmdCheckInstall(url string) (CheckConfig, error) {
+	fmt.Println(messages.Fetching(url))
 	setUp := new(CheckConfig)
 	resp, err := http.Get(url)
 	if err != nil {

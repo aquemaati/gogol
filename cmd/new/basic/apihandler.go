@@ -3,6 +3,8 @@ package cmd
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"gogol/internal/messages"
 	"net/http"
 )
 
@@ -31,6 +33,7 @@ type Subdirectory struct {
 }
 
 func GetBasicJson(url string) (BASIC, error) {
+	fmt.Println(messages.Fetching(url))
 	basic := new(BASIC)
 
 	resp, err := http.Get(url)
