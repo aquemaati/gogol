@@ -13,6 +13,9 @@ Welcome to **Gogol**, your go-to tool for rapidly creating projects in various p
 - 🔍 **Check if your computer meets the necessary configuration** and if the required languages are installed.
 - 💡 **Easily install missing languages** to get your environment ready.
 
+## public API
+https://github.com/aquemaati/gogol-api
+
 ## Examples of Usage
 
 ### Creating a Basic Application in Go
