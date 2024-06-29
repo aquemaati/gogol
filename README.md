@@ -6,7 +6,8 @@
 
 Welcome to **Gogol**, your go-to tool for rapidly creating projects in various programming languages, checking your system's configuration, and facilitating the installation of missing languages. Whether you are starting a simple project or setting up libraries, Gogol is here to streamline the process for you.
 
-![Gogol Comic]([https://via.placeholder.com/500x250?text=Gogol+Comic](https://files.oaiusercontent.com/file-YXJDEoLDPBoxo2kIZZVvUcPM?se=2024-06-29T09%3A04%3A55Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D79746961-9eb6-4ce7-8106-1f4e94802c84.webp&sig=zKeuKBROpnZ5qZV85p5/mJ6kzvOfL6t32yw8f3/yrv0%3D))
+
+![gogolReadmeImage](https://github.com/aquemaati/gogol/assets/160750138/efe83ddc-b1f8-491f-8ef2-a86cc52acb23)
 
 ## Features
 
