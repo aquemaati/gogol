@@ -7,8 +7,6 @@
 Welcome to **Gogol**, your go-to tool for rapidly creating projects in various programming languages, checking your system's configuration, and facilitating the installation of missing languages. Whether you are starting a simple project or setting up libraries, Gogol is here to streamline the process for you.
 
 
-![gogolReadmeImage](https://github.com/aquemaati/gogol/assets/160750138/efe83ddc-b1f8-491f-8ef2-a86cc52acb23)
-
 ## Features
 
 - 🛠️ **Quickly create projects** in multiple programming languages, including the libraries you need.
@@ -62,7 +60,7 @@ gogol new basic -l go -n myGoApp -d github.com/01-edu/z01
 
 For any questions or issues, please open an issue on GitHub
 
-![Gogol Comic](mnt/data/file-YXJDEoLDPBoxo2kIZZVvUcPM)
+![gogolReadmeImage](https://github.com/aquemaati/gogol/assets/160750138/efe83ddc-b1f8-491f-8ef2-a86cc52acb23)
 
 ---
 
